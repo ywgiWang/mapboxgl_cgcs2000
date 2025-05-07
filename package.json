@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.70",
+    "fastify": "^4.6.0",
+    "node-fetch": "^3.3.2"
+  }
+}
