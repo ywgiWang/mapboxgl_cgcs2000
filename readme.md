@@ -4,13 +4,17 @@
 ## Project Introduction
 ## 项目介绍
 
-This is a Fastify-based web service for transforming WMTS tile services into map tiles under CGCS2000 coordinate system. Main features include:
+This is a Fastify-based web service that transforms WMTS tile requests from MapboxGL (Mercator projection) to CGCS2000 coordinate system, redraws PNG tiles and returns them to the MapboxGL frontend. Main features include:
 
 这是一个基于Fastify的Web服务，用于将mapboxgl对墨卡托坐标系下wmts瓦片请求转化为对cgcs2000坐标系下的瓦片请求，重新绘制png瓦片后返回给mapboxgl前端。项目主要功能包括：
 - 接收前端mapboxgl Mercator投影的瓦片请求
+  - Receive tile requests from MapboxGL frontend in Mercator projection
 - 将请求行列号转换为CGCS2000坐标系并计算瓦片四至坐标
+  - Convert tile row/column numbers to CGCS2000 coordinate system and calculate tile bounds
 - 从指定WMTS服务获取对应区域的瓦片
+  - Fetch corresponding tiles from specified WMTS service
 - 合并多个瓦片并返回合成图像
+  - Merge multiple tiles and return the composite image
 
 ## Installation Steps
 ## 安装步骤
