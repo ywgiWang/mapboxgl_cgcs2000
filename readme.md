@@ -11,8 +11,8 @@ This is a Fastify-based web service that transforms WMTS tile requests from Mapb
   - Receive tile requests from MapboxGL frontend in Mercator projection
 - 将请求行列号转换为CGCS2000坐标系并计算瓦片四至坐标
   - Convert tile row/column numbers to CGCS2000 coordinate system and calculate tile bounds
-- 从指定WMTS服务获取对应区域的瓦片
-  - Fetch corresponding tiles from specified WMTS service
+- 从cgcs2000 的WMTS服务获取对应区域的瓦片
+  - Fetch corresponding tiles from CGCS2000 WMTS service
 - 合并多个瓦片并返回合成图像
   - Merge multiple tiles and return the composite image
 
@@ -42,10 +42,27 @@ npm start
 ```
 /arcgis/rest/services/{folder}/{layer}/MapServer/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=imgmap&STYLE=default&TILEMATRIXSET=default028mm&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&FORMAT=image/png
 ```
+前端mapboxgl示例代码：
+```js
+        map.addLayer({
+          id: "cgcs2000-img-layer",
+          type: "raster",
+          source: {
+            type: "raster",
+            tiles: [
+              "http://localhost:3000/arcgis/rest/services/zj_tdt/services/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=imgmap&STYLE=default&TILEMATRIXSET=default028mm&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&FORMAT=image%2Fpng"
+            ],
+            tileSize: 256
+          },
+          paint: {},
+          layout: { visibility: "visible" },
+        });
+```
 
 ## Configuration
 ## 配置说明
 
+- 
 - Modify the `target_wmts_url` variable in `app.js` to configure your WMTS service URL
 - 修改`app.js`中的`target_wmts_url`变量配置您的WMTS服务地址
 - Adjust the resolution parameters in the `RESOLUTIONS` array as needed
